@@ -1,0 +1,99 @@
+#include "pch.h"
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+
+using namespace System;
+using namespace std;
+
+int leerCantidadFiguras();
+int generarCantidadFiguras(int minValor, int maxValor);
+void dibujarFigura(int n);
+int menuOpciones();
+
+int main()
+{
+    srand(time(0));//semilla
+    int opcionSeleccionada;
+    int cantidadFiguras;
+
+    do {
+        opcionSeleccionada = menuOpciones();
+
+        switch (opcionSeleccionada)
+        {
+        case 1:
+            cantidadFiguras = leerCantidadFiguras();
+            cout << "cantidad figuras:" << cantidadFiguras << endl;
+           
+            for (int i = 0; i < cantidadFiguras; i++)
+            {
+                dibujarFigura(5);//dimension de 5x5
+            }
+
+
+            break;
+        case 2:
+            cantidadFiguras = generarCantidadFiguras(5, 10);
+            cout << "cantidad figuras:" << cantidadFiguras << endl;
+            for (int i = 0; i < cantidadFiguras; i++)
+            {
+                dibujarFigura(5);//dimension de 5x5
+            }
+
+            break;
+        }
+
+    } while (opcionSeleccionada != 3);
+
+    system("pause>NULL");
+    return 0;
+}
+
+//donde el usuario indica el numero de figuras entre 5 a 10 figuras
+int leerCantidadFiguras() {
+    int cantidadFiguras;
+    do
+    {
+        cout << "Ingrese cantidad de figuras" << endl;
+        cout << "solo de 5 pa arriba" << endl;
+        cin >> cantidadFiguras;
+    } while (cantidadFiguras < 5 || cantidadFiguras > 10);
+    return cantidadFiguras;
+}
+
+//que el programa genere aleatoriamente entre 5 a 10 figuras
+int generarCantidadFiguras(int minValor, int maxValor) {
+    return   rand() % (maxValor - minValor) + minValor;
+}
+
+int menuOpciones() {
+    int opcion;
+    do {
+        cout << "MENU DE OPCIONES" << endl;
+        cout << "1. Jugador ingresa cantidad de figuras" << endl;
+        cout << "2. Computadora genera cantidad de figuras" << endl;
+        //cout << "3. Dibujar figura" << endl;
+        cout << "3. salir" << endl;
+        cout << "seleccione una opcion:" << endl;
+        cin >> opcion;
+    } while (opcion < 1 || opcion>3);
+    return opcion;
+}
+
+void dibujarFigura(int n) {
+    for (int i = 0; i < n; i++)//filas
+    {
+        for (int j = 0; j < n; j++) //columnas
+        {
+            if (i == 0 || i == n - 1 || j == 0 || j == n - 1) {
+                cout << "*";
+            }
+            else {
+                cout << " ";
+            }
+
+        }
+        cout << endl;
+    }
+}
